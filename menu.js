@@ -7,6 +7,7 @@ import {
     legnagyobbFogyasztas
 } from "./services/fuvarService.js";
 import Fuvar from "./models/Fuvar.js";
+import { read } from "fs";
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -41,8 +42,9 @@ function handleMenu(choice) {
 function fuvarosok() {
     const list = readCSV("./data/fuvarosok.csv");
     
-    console.log("DEBUG:", list);
-    list.forEach(f => console.log(`${f.id} - ${f.nev}`));
+    for (const fuvaros of list) {
+        console.log(`${fuvaros.id} - ${fuvaros.nev}`)
+    };
     menu();
 }
 
@@ -62,12 +64,13 @@ function ujFuvar() {
 
 function fuvarok() {
     const list = getFuvarok();
+    const lista = readCSV('./data/fuvarosok.csv')
     if (list.length === 0) {
         console.log("Nincs még felvett fuvar.");
     } else {
         list.forEach((f, i) => {
             console.log(
-                `${i + 1}. ${f.tavolsag} km | ${f.osszFogyasztas().toFixed(2)} liter`
+                `${lista[i].nev} | ${f.tavolsag} km | ${f.osszFogyasztas().toFixed(2)} liter`
             );
         });
     }

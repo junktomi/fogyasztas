@@ -1,9 +1,12 @@
+import fs from 'node:fs'
+import * as csv from 'csv/sync'
+
 export default class Fuvar {
     constructor(fuvarosId, fogyasztas, uzemanyagAr, tavolsag) {
         this.fuvarosId = Number(fuvarosId);
-        this.fogyasztas = Number(fogyasztas); // l / 100 km
-        this.uzemanyagAr = Number(uzemanyagAr); // Ft / liter
-        this.tavolsag = Number(tavolsag); // km
+        this.fogyasztas = Number(fogyasztas);
+        this.uzemanyagAr = Number(uzemanyagAr);
+        this.tavolsag = Number(tavolsag);
     }
 
     osszFogyasztas() {
